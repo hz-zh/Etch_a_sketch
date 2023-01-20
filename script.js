@@ -12,8 +12,6 @@ createBoard.onclick = function() {
    else getNum();
  };
 
-resetBoard.onclick = function() { resetGameBoard() };
-
 input.onclick = function() {
    input.value = '';
    input.setAttribute('style', 'font-size: 30px; color: rgb(0, 0, 0);');
@@ -35,6 +33,7 @@ function makeSquares (num) {
 
       container.appendChild(square);
    }
+   resetBoard.onclick = function() { resetGameBoard(num) };
 };
 
 function getNum () {
@@ -48,11 +47,15 @@ function getNum () {
    createBoardClicked = true;
 };
 
-function resetGameBoard() {
+function resetGameBoard(num) {
    let element = document.querySelector(".container");
-   while (element.firstChild) {
-      element.removeChild(element.firstChild)
+   for (i = 0; i < (num * num); i++) {
+         remove();
     };
 
+    function remove() {
+      setInterval(function(){
+         element.removeChild(element.firstChild)}, 1000);
+    }
    createBoardClicked = false;
 }
