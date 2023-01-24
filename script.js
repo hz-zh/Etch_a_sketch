@@ -2,10 +2,13 @@ const container = document.querySelector('.container');
 const input = document.querySelector('.input');
 const toggleBoard = document.querySelector('.toggleBoard');
 const random = document.querySelector('.random');
+const content = document.querySelector('.content');
+const colorBoard = document.querySelector('.colorBoard');
 
 input.value = 'Enter a single board dimension between 3 and 60.';
 
 let createBoardClicked = false;
+let mouseOver = false;
 let num;
 
 toggleBoard.onclick = function() { 
@@ -18,6 +21,14 @@ input.onclick = function() {
    input.value = '';
    input.setAttribute('style', 'font-size: 30px; color: rgb(0, 0, 0);');
 };
+
+colorBoard.onclick = function() {
+   if (!mouseOver){
+      colorBoard.style.backgroundColor = 'black';
+   }
+   else colorBoard.style.backgroundColor = 'rgb(31, 113, 2)';
+   mouseOver = !mouseOver;
+}
 
 function resetInput() {
    input.setAttribute('style', 'color:rgba(0, 0, 0, 0.513); font-size: 18px;');
@@ -37,6 +48,8 @@ function getNum () {
    makeSquares(num);
 };
 
+let backgroundCounter = 0;
+
 function makeSquares (num) {
    let i = 0;
    let intervalID;
@@ -45,11 +58,12 @@ function makeSquares (num) {
       createBoardClicked = true;
 
       const square = document.createElement('div');
-      square.setAttribute('style', `background: rgb(54, 14, 14); width: 
-      ${575/num}px; height: ${575/num}px; border: solid 0px;`);
+      square.setAttribute('style', `background: rgb(0, 0, 0);width: 
+      ${650/num}px; height: ${650/num}px; border: solid 0px;`);
 
       container.appendChild(square);
-      container.setAttribute('style', `max-width: 575px`);
+      container.setAttribute('style', `max-width: 650px`);
+      if (mouseOver) {colorChanger(square, 10*i, 15*i, 20*i);}
 
       i++;
       if (i == (num * num)) clearInterval(intervalID);
@@ -60,34 +74,18 @@ function makeSquares (num) {
    brushTool();
 };
 
+let brushCounter = 0;
+let brushCounter2 = 90;
+let brushCounter3 = 180;
+
 function brushTool() {
-   let brushCounter = 0;
-   let brushCounter2 = 90;
-   let brushCounter3 = 180;
    random.onclick = function() {
       brushCounter = randomAngle();
       brushCounter2 = randomAngle();
       brushCounter3 = randomAngle();
    };
-
    container.addEventListener('mouseover', 
-   function(e) {
-      let startingColor = [0, 0, 0]; 
-      //if (brushCounter > 10) brushCounter = 100;
-      //if (brushCounter2 > 500) brushCounter2 = 270;
-     // if (brushCounter3 > 300) brushCounter3 = 0;
-   
-      startingColor[0] = oscillate0(brushCounter);
-      startingColor[1] = oscillate1(brushCounter2);
-      startingColor[2] = oscillate2(brushCounter3);
-
-      brushCounter += 5;
-      brushCounter2 += 7;
-      brushCounter3 += 10;
-      console.log(startingColor[0], startingColor[1], startingColor[2]);
-      e.target.style.backgroundColor = `rgb(${colorPicker(startingColor[0])} 
-      ${colorPicker(startingColor[1])} ${colorPicker(startingColor[2])})`;
-    }, false); 
+   function(e) { colorChanger(e, 5, 7, 10)}, false); 
 }
 
 function randomAngle() {
@@ -118,22 +116,24 @@ function oscillate0(input) {
    return 0 + Math.abs(((input + range) % (range * 2)) - range);
  };
 
- function colorChanger() {
-   let startingColor = [0, 0, 0]; 
-   //if (brushCounter > 10) brushCounter = 100;
-   //if (brushCounter2 > 500) brushCounter2 = 270;
-  // if (brushCounter3 > 300) brushCounter3 = 0;
+ let startingColor = [0, 0, 0]; 
 
+ function colorChanger(e, increm1, increm2, increm3) {
    startingColor[0] = oscillate0(brushCounter);
    startingColor[1] = oscillate1(brushCounter2);
    startingColor[2] = oscillate2(brushCounter3);
 
-   brushCounter += 5;
-   brushCounter2 += 7;
-   brushCounter3 += 10;
+   brushCounter += increm1;
+   brushCounter2 += increm2;
+   brushCounter3 += increm3;
    console.log(startingColor[0], startingColor[1], startingColor[2]);
-   container.style.backgroundColor = `rgb(${colorPicker(startingColor[0])} 
+   if (mouseOver) { e.style.backgroundColor = `rgb(${colorPicker(startingColor[0])} ${colorPicker(startingColor[1])} 
+   ${colorPicker(startingColor[2])})`;
+   }
+   else {
+   e.target.style.backgroundColor = `rgb(${colorPicker(startingColor[0])} 
    ${colorPicker(startingColor[1])} ${colorPicker(startingColor[2])})`;
+   }
  }; 
 
 
@@ -145,7 +145,7 @@ function resetGameBoard() {
          intervalID = setInterval(function(){
             element.removeChild(element.firstChild);
             if (!element.firstChild) clearInterval(intervalID);
-         }, (.5/num));
+         });
 
    createBoardClicked = false;
    resetInput();
