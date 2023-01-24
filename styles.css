@@ -37,15 +37,18 @@ input:focus {
 
 button {
    font-size: 20px;
-   border: black solid 1px;
-   border-radius: 8px;
+   border: rgb(95, 18, 18) solid 4px;
+   border-radius: 180px;
    padding: 8px 12px;
    color:rgb(207, 205, 139);
    background-color: rgb(130, 0, 0);
 }
 
 button:hover {
-   background-color: rgb(155, 16, 16);}
+   background-color: rgb(207, 205, 139);
+   color: rgb(130, 0, 0);
+}
+   
 
 .content {
    display: flex;
