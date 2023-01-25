@@ -59,11 +59,14 @@ function makeSquares (num) {
 
       const square = document.createElement('div');
       square.setAttribute('style', `background: rgb(0, 0, 0);width: 
-      ${650/num}px; height: ${650/num}px; border: solid 0px;`);
+      ${600/num}px; height: ${600/num}px; border: solid 0px;`);
 
       container.appendChild(square);
-      container.setAttribute('style', `max-width: 650px`);
-      if (mouseOver) {colorChanger(square, 10*i, 15*i, 20*i);}
+      container.setAttribute('style', `max-width: 600px;`);
+      if (mouseOver) {
+         colorChanger(square, 1, 5, 2);
+         colorBoard.textContent = 'YAY (unselect to brush)';
+      }
 
       i++;
       if (i == (num * num)) clearInterval(intervalID);
@@ -85,7 +88,7 @@ function brushTool() {
       brushCounter3 = randomAngle();
    };
    container.addEventListener('mouseover', 
-   function(e) { colorChanger(e, 5, 7, 10)}, false); 
+   function(e) { colorChanger(e, 1, 2, 3)}, false); 
 }
 
 function randomAngle() {
@@ -131,8 +134,7 @@ function oscillate0(input) {
    ${colorPicker(startingColor[2])})`;
    }
    else {
-   e.target.style.backgroundColor = `rgb(${colorPicker(startingColor[0])} 
-   ${colorPicker(startingColor[1])} ${colorPicker(startingColor[2])})`;
+   e.target.style.backgroundColor = `rgb(${startingColor[0]} ${startingColor[1]} ${startingColor[2]})`;
    }
  }; 
 
