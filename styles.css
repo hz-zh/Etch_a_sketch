@@ -4,6 +4,7 @@ body {
    justify-content: space-between;
    margin: 0px;
    height: 100vh;
+   font-family: fantasy, Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .header {
@@ -17,16 +18,17 @@ body {
 input {
    font-size: 18px;
    border: black solid 3px;
-   border-radius: 8px;
-   padding: 6px;
+   border-radius: 100px;
+   padding: 10px;
    min-height: 30px;
    min-width: 420px;
    color:rgba(0, 0, 0, 0.513);
    background-color: rgb(180, 105, 105);
+   box-sizing: border-box;
 }
 
 input:focus {
-   border: rgb(255, 236, 25) solid 3px;
+   border: rgb(175, 18, 18) solid 1px;
 }
 
 .buttonContainer {
@@ -42,6 +44,7 @@ button {
    padding: 8px 12px;
    color:rgb(207, 205, 139);
    background-color: rgb(130, 0, 0);
+   font-family: fantasy, Verdana, Geneva, Tahoma, sans-serif;
 }
 
 button:hover {
@@ -49,10 +52,15 @@ button:hover {
    color: rgb(130, 0, 0);
 }
 
-.colorBoard {
-   background-color: rgb(31, 113, 2);
+.mystery {
+   background-color: rgba(26, 96, 1, 0.604);
    color: rgb(149, 251, 255);
    border: rgb(12, 12, 122) solid 4px;
+   font-family: fantasy, Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.mystery:hover {
+   background-color: rgb(50, 41, 108);
 }
    
 
@@ -86,3 +94,46 @@ button:hover {
    color:rgb(207, 205, 139);
    padding: 12px;
 }
+/*  staged for upcoming slider
+.slidecontainer {
+ display: flex;
+ }
+ 
+ /* The slider itself 
+ .slider {
+   -webkit-appearance: none;  /* Override default CSS styles */
+   appearance: none;
+   width: 100%; /* Full-width */
+   height: 25px; /* Specified height */
+   background: #850d0d; /* Grey background */
+   outline: none; /* Remove outline */
+   opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+   -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+   transition: opacity .2s;
+ }
+ 
+ /* Mouse-over effects 
+ .slider:hover {
+   opacity: 1; /* Fully shown on mouse-over */
+ }
+ 
+ /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) 
+ .slider::-webkit-slider-thumb {
+   -webkit-appearance: none; /* Override default look */
+   appearance: none;
+   width: 15px; /* Set a specific slider handle width */
+   height: 45px; /* Slider handle height */
+   background: #f4b93b; /* Green background */
+   cursor: pointer; /* Cursor on hover */
+   border: rgb(88, 139, 0) solid 1px;
+   border-radius: 180px;
+ }
+ /*
+ .slider::-moz-range-thumb {
+   width: 25px; /* Set a specific slider handle width */
+   height: 25px; /* Slider handle height */
+   background: #04AA6D; /* Green background */
+   cursor: pointer; /* Cursor on hover */ 
+ }
+
+ 
