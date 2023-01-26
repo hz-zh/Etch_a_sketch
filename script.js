@@ -1,31 +1,33 @@
 const container = document.querySelector('.container');
-const input = document.querySelector('.input');
 const toggleBoard = document.querySelector('.toggleBoard');
 const random = document.querySelector('.random');
 const content = document.querySelector('.content');
 const mystery = document.querySelector('.mystery');
+const slider = document.getElementById("myRange");
+const sliderValue = document.querySelector(".sliderValue");
+sliderValue.textContent = slider.value; 
 
-input.value = 'Enter a single board dimension between 3 and 60.';
+slider.oninput = function() {
+   sliderValue.textContent = this.value;
+ }
 
 let createBoardClicked = false;
+let boardStatus = false;
 let brushActive = false;
 let num;
 
-input.onclick = function() {
-   toggleBoard.style.display = 'flex';
-   input.value = '';
-   input.setAttribute('style', 'font-size: 30px; color: rgb(0, 0, 0);');
-};
-
 toggleBoard.onclick = function() { 
-   if (createBoardClicked == true) resetGameBoard();
-   else getNum();
+   if (boardStatus == false) {
+      if (createBoardClicked == true) resetGameBoard();
+      else if (createBoardClicked == false) getNum();
+   }
+   else return;
  };
 
  random.onclick = function() {
-   brushCounter1 = randomAngle();
-   brushCounter2 = randomAngle();
-   brushCounter3 = randomAngle();
+   oscCounter1 = randomAngle();
+   oscCounter2 = randomAngle();
+   oscCounter = randomAngle();
 };
 
 mystery.onclick = function() {
@@ -41,13 +43,10 @@ mystery.onclick = function() {
    }, 110);
 }
 
-function resetInput() {
-   input.setAttribute('style', 'color:rgba(0, 0, 0, 0.513); font-size: 18px;');
-   input.value = 'Enter a single board dimension between 3 and 60.';
-};
-
 function getNum () {
-   num = input.value;
+   createBoardClicked = true;
+   boardStatus = true;
+   num = slider.value;
    if (num > 60 || num < 3 || 
       num == 'Enter a single board dimension between 3 and 60.' 
       || typeof(num) === 'NaN')
@@ -78,12 +77,14 @@ function makeSquares (num) {
    });
 
    toggleBoard.textContent = 'reset board';
+   boardStatus = false;
    brushTool();
+   return;
 };
 
-let brushCounter1 = 0;
-let brushCounter2 = 90;
-let brushCounter3 = 180;
+let oscCounter1 = 0;
+let oscCounter2 = 90;
+let oscCounter = 180;
 
 function brushTool() {
    let i = 0;
@@ -102,13 +103,13 @@ function randomAngle() {
  let startingColor = [0, 0, 0]; 
 
  function colorChanger(e, increm1, increm2, increm3) {
-   startingColor[0] = oscillate0(brushCounter1);
-   startingColor[1] = oscillate1(brushCounter2);
-   startingColor[2] = oscillate2(brushCounter3);
+   startingColor[0] = oscillate1(oscCounter1);
+   startingColor[1] = oscillate2(oscCounter2);
+   startingColor[2] = oscillate3(oscCounter);
 
-   brushCounter1 += increm1;
-   brushCounter2 += increm2;
-   brushCounter3 += increm3;
+   oscCounter1 += increm1;
+   oscCounter2 += increm2;
+   oscCounter += increm3;
    //console.log(startingColor[0], startingColor[1], startingColor[2]); 
    if (brushActive) { e.style.backgroundColor = `rgb(${startingColor[0]} ${startingColor[1]} 
    ${startingColor[2]})`;
@@ -118,20 +119,20 @@ function randomAngle() {
    }
  }; 
 
- function oscillate0(input) {
+ function oscillate1(input) {
    let max = 255;
    let min = 0;
    let range = max - min;
    return 0 + Math.abs(((input + range) % (range * 2)) - range);
  };
- function oscillate1(input) {
+ function oscillate2(input) {
    let max = 255;
    let min = 0;
    let range = max - min;
    console.log(0 + Math.abs(((input + range) % (range * 2)) - range));
    return 0 + Math.abs(((input + range) % (range * 2)) - range);
  };
- function oscillate2(input) {
+ function oscillate3(input) {
    let max = 255;
    let min = 0;
    let range = max - min;
@@ -148,14 +149,12 @@ function randomAngle() {
 };
 
 function resetGameBoard() {
-   toggleBoard.style.display = 'none';
    let element = document.querySelector(".container");
 
          while (element.firstChild) {
             element.removeChild(element.firstChild);
          }
 
-   createBoardClicked = false;
-   resetInput();
+   createBoardClicked = false; 
    toggleBoard.textContent = 'create board';
 }
