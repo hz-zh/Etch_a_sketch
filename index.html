@@ -10,14 +10,19 @@
 <body>
    <div class="header">ETCH-A-SKETCH</div>
    <div class="content">
-      <div class="slidecontainer">
-         <input type="range" min="3" max="60" value="23" class="slider" id="myRange">
-         <div class="sliderValue"></div>
-      </div> 
-      <div class="buttonContainer">
-         <button class="toggleBoard" id="hoverPriority">create board</button>
-         <button class="random">random color!</button>
-         <button class="mystery">mystery</button>
+      <div class="controls">
+         <div class="slidecontainer">
+            <input type="range" min="3" max="60" value="23" class="slider" id="myRange">
+            <div class="sliderValue"></div>
+         </div> 
+         <div class="buttonContainer">
+            <button class="toggleBoard" id="hoverPriority">create board</button>
+            <button class="random">random color!</button>
+            <div class="mysteryContainer">
+               <button class="mystery">mystery</button>
+               <p>Epilepsy warning</p>
+            </div>
+         </div>
       </div>
       <div class="container" id="priority"></div>
    </div>

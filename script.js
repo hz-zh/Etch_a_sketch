@@ -12,16 +12,13 @@ slider.oninput = function() {
  }
 
 let createBoardClicked = false;
-let boardStatus = false;
 let brushActive = false;
 let num;
 
 toggleBoard.onclick = function() { 
-   if (boardStatus == false) {
-      if (createBoardClicked == true) resetGameBoard();
-      else if (createBoardClicked == false) getNum();
-   }
-   else return;
+      if (createBoardClicked) resetGameBoard();
+      else if (!createBoardClicked) getNum();
+   return;
  };
 
  random.onclick = function() {
@@ -44,8 +41,6 @@ mystery.onclick = function() {
 }
 
 function getNum () {
-   createBoardClicked = true;
-   boardStatus = true;
    num = slider.value;
    if (num > 60 || num < 3 || 
       num == 'Enter a single board dimension between 3 and 60.' 
@@ -77,7 +72,6 @@ function makeSquares (num) {
    });
 
    toggleBoard.textContent = 'reset board';
-   boardStatus = false;
    brushTool();
    return;
 };
@@ -102,7 +96,7 @@ function randomAngle() {
 
  let startingColor = [0, 0, 0]; 
 
- function colorChanger(e, increm1, increm2, increm3) {
+function colorChanger(e, increm1, increm2, increm3) {
    startingColor[0] = oscillate1(oscCounter1);
    startingColor[1] = oscillate2(oscCounter2);
    startingColor[2] = oscillate3(oscCounter);
@@ -143,7 +137,7 @@ function randomAngle() {
    NodeList.prototype.forEach = Array.prototype.forEach;
    let children = container.childNodes;
    children.forEach(function(item){
-      colorChanger(item, 1+i, 2+i, 4+i);
+      colorChanger(item, 1*i, 2*i, 4*i);
    }); 
    brushActive = false;
 };

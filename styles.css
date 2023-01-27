@@ -4,7 +4,9 @@ body {
    justify-content: space-between;
    margin: 0px;
    height: 100vh;
+   gap: 15px;
    font-family: fantasy, Verdana, Geneva, Tahoma, sans-serif;
+   background-color: rgb(0, 0, 0);
 }
 
 .header {
@@ -17,8 +19,7 @@ body {
 
 .content {
    display: flex;
-   flex-direction: column;
-   background-color: rgb(0, 0, 0);
+   justify-content: space-evenly;
    align-self: stretch;
    align-items: center;
    padding: 16px;
@@ -28,71 +29,25 @@ body {
    color:rgb(207, 205, 139);
 }
 
-.buttonContainer {
+.controls {
    display: flex;
-   gap: 20px;
-   justify-content: space-between;
-}
-
-button {
-   font-size: 20px;
-   border: rgb(95, 18, 18) solid 4px;
-   border-radius: 180px;
-   padding: 8px 12px;
-   color:rgb(207, 205, 139);
-   background-color: rgb(130, 0, 0);
-   font-family: fantasy, Verdana, Geneva, Tahoma, sans-serif;
-}
-
-button:hover {
-   background-color: rgb(207, 205, 139);
-   color: rgb(130, 0, 0);
-}
-
-.mystery {
-   background-color: rgba(26, 96, 1, 0.604);
-   color: rgb(149, 251, 255);
-   border: rgb(12, 12, 122) solid 4px;
-   font-family: fantasy, Verdana, Geneva, Tahoma, sans-serif;
-}
-
-.mystery:hover {
-   background-color: rgb(50, 41, 108);
-}
-
-.container {
-   display: flex;
-   flex-wrap: wrap;
-   padding: 0px;
-   border: ridge rgb(165, 22, 22) 12px;
-}
-
-.boardDiv:mouseover {
-   background-color: rgb(54, 14, 14);
-}
-
-.footer {
-   font-size: 16px;
-   text-align: center;
-   background-color: rgb(130, 0, 0);
-   padding: 12px;
+   flex-direction: column;
 }
 
 input {
-   border: black solid 0px;
+   border: rgb(254, 0, 0) solid 0px;
    border-radius: 9px;
-   padding: 0px;
    box-sizing: border-box;
-}
-
-input:focus {
    border: rgb(175, 18, 18) solid 1px;
 }
 
 .slidecontainer {
    display: flex;
-   gap: 16px;
-   
+   align-items: center;
+   justify-content: space-between;
+   padding: 8px;
+   gap: 26px;
+
  }
  
  .slider {
@@ -100,9 +55,7 @@ input:focus {
    appearance: none;
    width: 24rem; 
    height: 15px;
-   margin-left: 54px;
-   margin-top: 16px;
-   background: #850d0d;
+   background: #850d0d94;
    outline: none; 
    opacity: 0.7;
    -webkit-transition: .4s; 
@@ -133,7 +86,68 @@ input:focus {
  }
 
  .sliderValue {
-   padding: 12px;
+   flex: 0;
+   width: 1em;
+   text-align: center;
  }
+
+.buttonContainer {
+   display: flex;
+   padding-top: 12px;
+   flex-direction: column;
+   gap: 20px;
+   justify-content: space-between;
+   align-items: center;
+}
+
+button {
+   max-height: 3em;
+   font-size: 20px;
+   border: rgb(95, 18, 18) solid 4px;
+   border-radius: 180px;
+   padding: 8px 12px;
+   color:rgb(207, 205, 139);
+   background-color: rgb(130, 0, 0);
+   font-family: fantasy, Verdana, Geneva, Tahoma, sans-serif;
+}
+
+button:hover {
+   background-color: rgb(207, 205, 139);
+   color: rgb(130, 0, 0);
+}
+
+.mystery {
+   background-color: rgba(26, 96, 1, 0.604);
+   color: rgb(149, 251, 255);
+   border: rgb(12, 12, 122) solid 4px;
+   font-family: fantasy, Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.mystery:hover {
+   background-color: rgb(50, 41, 108);
+}
+
+.mysteryContainer {
+   display: flex;
+   gap: 12px;
+}
+.container {
+   display: flex;
+   flex-wrap: wrap;
+   border: ridge rgb(165, 22, 22) 12px;
+}
+
+.boardDiv:mouseover {
+   background-color: rgb(54, 14, 14);
+}
+
+.footer {
+   font-size: 16px;
+   text-align: center;
+   background-color: rgb(130, 0, 0);
+   padding: 12px;
+}
+
+
 
  
