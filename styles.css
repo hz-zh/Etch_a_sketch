@@ -32,6 +32,7 @@ body {
 .controls {
    display: flex;
    flex-direction: column;
+   gap: 28px;
 }
 
 input {
@@ -45,9 +46,7 @@ input {
    display: flex;
    align-items: center;
    justify-content: space-between;
-   padding: 8px;
    gap: 26px;
-
  }
  
  .slider {
@@ -95,7 +94,7 @@ input {
    display: flex;
    padding-top: 12px;
    flex-direction: column;
-   gap: 20px;
+   gap: 40px;
    justify-content: space-between;
    align-items: center;
 }
@@ -131,6 +130,21 @@ button:hover {
    display: flex;
    gap: 12px;
 }
+
+.expo {
+   background-color: rgba(26, 96, 1, 0.604);
+   color: rgb(149, 251, 255);
+   border: rgb(12, 12, 122) solid 4px;
+   font-family: fantasy, Verdana, Geneva, Tahoma, sans-serif;
+   font-size: 16px;
+   margin-top: -18px;
+   margin-left: -124px
+}
+
+.expo:hover {
+   background-color: rgb(50, 41, 108);
+}
+
 .container {
    display: flex;
    flex-wrap: wrap;
@@ -146,6 +160,10 @@ button:hover {
    text-align: center;
    background-color: rgb(130, 0, 0);
    padding: 12px;
+}
+
+p {
+   line-height: 32px;
 }
 
 

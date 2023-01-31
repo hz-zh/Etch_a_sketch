@@ -3,17 +3,21 @@ const toggleBoard = document.querySelector('.toggleBoard');
 const random = document.querySelector('.random');
 const content = document.querySelector('.content');
 const mystery = document.querySelector('.mystery');
+const expo = document.querySelector('.expo');
 const slider = document.getElementById("myRange");
 const sliderValue = document.querySelector(".sliderValue");
+
+let createBoardClicked = false;
+let brushActive = false;
+let expoClicked = false;
+let mysteryClicked = false;
+let num;
+
 sliderValue.textContent = slider.value; 
 
 slider.oninput = function() {
    sliderValue.textContent = this.value;
- }
-
-let createBoardClicked = false;
-let brushActive = false;
-let num;
+ };
 
 toggleBoard.onclick = function() { 
       if (createBoardClicked) resetGameBoard();
@@ -24,11 +28,14 @@ toggleBoard.onclick = function() {
  random.onclick = function() {
    oscCounter1 = randomAngle();
    oscCounter2 = randomAngle();
-   oscCounter = randomAngle();
+   oscCounter3 = randomAngle();
 };
 
 mystery.onclick = function() {
    brushActive = true;
+   mysteryClicked = !mysteryClicked;
+   if (mysteryClicked) mystery.style.backgroundColor = 'rgb(50, 41, 108)';
+   else if (!mysteryClicked) mystery.style.backgroundColor = 'rgba(26, 96, 1, 0.604)';
 
    let i = 0;
    let intervalID;
@@ -36,9 +43,31 @@ mystery.onclick = function() {
       brushActive = true;
       colorPixels(i);
       i++;
-      if (i > 350) clearInterval(intervalID);
+      if (i > 350 || !mysteryClicked) clearInterval(intervalID);
    }, 110);
-}
+};
+
+expo.onclick = function() {
+   expoClicked = !expoClicked;
+   if (expoClicked) expo.style.backgroundColor = 'rgb(50, 41, 108)';
+   else if (!expoClicked) expo.style.backgroundColor = 'rgba(26, 96, 1, 0.604)';
+};
+
+function colorPixels(i) {
+   NodeList.prototype.forEach = Array.prototype.forEach;
+   let children = container.childNodes;
+   if (expoClicked) {
+      children.forEach(function(item){
+         if (mysteryClicked) colorChanger(item, 1*i, 3*i, 6*i);
+      }); 
+   }
+   else {
+      children.forEach(function(item){
+         if (mysteryClicked) colorChanger(item, i, i, i);
+      }); 
+   }
+   brushActive = false;
+};
 
 function getNum () {
    num = slider.value;
@@ -57,7 +86,7 @@ function makeSquares (num) {
    let i = 0;
    let intervalID;
 
-   intervalID = setInterval(function(){
+   for (i = 0; i < (num * num); i++) {
       createBoardClicked = true;
 
       const square = document.createElement('div');
@@ -66,10 +95,7 @@ function makeSquares (num) {
 
       container.appendChild(square);
       container.setAttribute('style', `max-width: 600px;`);
-      
-      i++;
-      if (i == (num * num)) clearInterval(intervalID);
-   });
+   };
 
    toggleBoard.textContent = 'reset board';
    brushTool();
@@ -78,7 +104,7 @@ function makeSquares (num) {
 
 let oscCounter1 = 0;
 let oscCounter2 = 90;
-let oscCounter = 180;
+let oscCounter3 = 40;
 
 function brushTool() {
    let i = 0;
@@ -99,11 +125,11 @@ function randomAngle() {
 function colorChanger(e, increm1, increm2, increm3) {
    startingColor[0] = oscillate1(oscCounter1);
    startingColor[1] = oscillate2(oscCounter2);
-   startingColor[2] = oscillate3(oscCounter);
+   startingColor[2] = oscillate3(oscCounter3);
 
    oscCounter1 += increm1;
    oscCounter2 += increm2;
-   oscCounter += increm3;
+   oscCounter3 += increm3;
    //console.log(startingColor[0], startingColor[1], startingColor[2]); 
    if (brushActive) { e.style.backgroundColor = `rgb(${startingColor[0]} ${startingColor[1]} 
    ${startingColor[2]})`;
@@ -132,15 +158,6 @@ function colorChanger(e, increm1, increm2, increm3) {
    let range = max - min;
    return 0 + Math.abs(((input + range) % (range * 2)) - range);
  };
-
- function colorPixels(i) {
-   NodeList.prototype.forEach = Array.prototype.forEach;
-   let children = container.childNodes;
-   children.forEach(function(item){
-      colorChanger(item, 1*i, 2*i, 4*i);
-   }); 
-   brushActive = false;
-};
 
 function resetGameBoard() {
    let element = document.querySelector(".container");
